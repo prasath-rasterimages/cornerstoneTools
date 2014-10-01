@@ -19,7 +19,7 @@ var cornerstoneTools = (function($, cornerstone, cornerstoneTools) {
         }
         $(element).on("CornerstoneToolsTouchDrag", touchDragCallback);
 
-        function touchendCallback(mouseMoveData) {
+        function touchendCallback(e,eventData) {
             handle.eactive = false;
             $(element).off("CornerstoneToolsTouchDrag", touchDragCallback);
             $(element).off("CornerstoneToolsDragEnd", touchendCallback);

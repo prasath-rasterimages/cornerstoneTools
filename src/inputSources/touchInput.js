@@ -71,6 +71,7 @@ var cornerstoneTools = (function($, cornerstone, cornerstoneMath, cornerstoneToo
                 page: cornerstoneMath.point.pageToPoint(e.gesture.touches[0]),
                 image: cornerstone.pageToPixel(element, e.gesture.touches[0].pageX, e.gesture.touches[0].pageY)
             };
+            lastPoints = cornerstoneTools.copyPoints(startPoints);
            
             touchEventDetail = {
                 event: e,
@@ -85,8 +86,7 @@ var cornerstoneTools = (function($, cornerstone, cornerstoneMath, cornerstoneToo
                 
             event = jQuery.Event("CornerstoneToolsDragStart", touchEventDetail);
            $(touchEventDetail.element).trigger(event, touchEventDetail);
-            lastPoints = cornerstoneTools.copyPoints(startPoints);
-            //return cornerstoneTools.pauseEvent(e);
+           
          
 
              if(event.isImmediatePropagationStopped() === false)
@@ -100,6 +100,8 @@ var cornerstoneTools = (function($, cornerstone, cornerstoneMath, cornerstoneToo
              
             }
             
+         
+          
          
 
         }
@@ -135,11 +137,14 @@ var cornerstoneTools = (function($, cornerstone, cornerstoneMath, cornerstoneToo
                         currentPoints: currentPoints,
                         deltaPoints: deltaPoints
                         };
-            $(touchEventDetail.element).trigger("CornerstoneToolsTouchDrag", eventData);
+           // $(touchEventDetail.element).trigger("CornerstoneToolsTouchDrag", eventData);
 
-              
-           lastPoints = cornerstoneTools.copyPoints(currentPoints);
-            
+           event = jQuery.Event("CornerstoneToolsTouchDrag", eventData);
+           $(touchEventDetail.element).trigger(event, eventData);
+
+            lastPoints = $.extend({}, currentPoints);
+          // lastPoints = cornerstoneTools.copyPoints(currentPoints);
+           //return cornerstoneTools.pauseEvent(e);
 
         } else if (e.type === 'dragend')
         {
@@ -171,7 +176,7 @@ var cornerstoneTools = (function($, cornerstone, cornerstoneMath, cornerstoneToo
 //            element.dispatchEvent(event);
               event = jQuery.Event("CornerstoneToolsDragEnd", eventData);
             $(touchEventDetail.element).trigger(event, eventData);
-            return cornerstoneTools.pauseEvent(e);
+            //return cornerstoneTools.pauseEvent(e);
         } else {
             return;
         }

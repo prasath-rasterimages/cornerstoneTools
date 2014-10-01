@@ -20,6 +20,7 @@ var cornerstoneTools = (function($, cornerstone, cornerstoneMath, cornerstoneToo
                 handle.y += touchMoveData.deltaPoints.image.y;
             }
             cornerstone.updateImage(element);
+            e.stopImmediatePropagation();
             return false; // false = cases jquery to preventDefault() and stopPropagation() this event
         }
 

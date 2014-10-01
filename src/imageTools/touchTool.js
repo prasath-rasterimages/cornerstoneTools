@@ -28,7 +28,6 @@ var cornerstoneTools = (function($, cornerstone, cornerstoneMath, cornerstoneToo
         }
 
         function touchDownActivateCallback(e, eventData) {
-           
             addNewMeasurement(eventData);
             return false; // false = cases jquery to preventDefault() and stopPropagation() this event
         }
@@ -38,7 +37,6 @@ var cornerstoneTools = (function($, cornerstone, cornerstoneMath, cornerstoneToo
 
         function touchMoveCallback(e, eventData)
         {
-           
             cornerstoneTools.activeToolcoordinate.setCoords(eventData);
       
             // if we have no tool data for this element, do nothing
@@ -46,7 +44,6 @@ var cornerstoneTools = (function($, cornerstone, cornerstoneMath, cornerstoneToo
             if (toolData === undefined) {
                 return;
             }
-
             // We have tool data, search through all data
             // and see if we can activate a handle
             var imageNeedsUpdate = false;
@@ -58,7 +55,6 @@ var cornerstoneTools = (function($, cornerstone, cornerstoneMath, cornerstoneToo
                     imageNeedsUpdate = true;
                 }
             }
-
             // Handle activation status changed, redraw the image
             if (imageNeedsUpdate === true) {
                 cornerstone.updateImage(eventData.element);
@@ -91,7 +87,6 @@ var cornerstoneTools = (function($, cornerstone, cornerstoneMath, cornerstoneToo
             var coords = eventData.startPoints.image;
             var toolData = cornerstoneTools.getToolState(e.currentTarget, touchToolInterface.toolType);
             var i;
-
             // now check to see if there is a handle we can move
             if (toolData !== undefined) {
                 for (i = 0; i < toolData.data.length; i++) {
